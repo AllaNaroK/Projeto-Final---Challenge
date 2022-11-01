@@ -1,0 +1,3354 @@
+{
+	"info": {
+		"_postman_id": "51ae453c-48e4-426d-819b-f3de86eacfdf",
+		"name": "ServeRest - Challenge",
+		"description": "Uma Collection principal para guardar todas as requisições do projeto, onde estão organizadas e divididas em pastas subsequentes, conforme o swagger da API ServeRest.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23019980"
+	},
+	"item": [
+		{
+			"name": "ServeRest - Rotas",
+			"item": [
+				{
+					"name": "/login",
+					"item": [
+						{
+							"name": "POST",
+							"item": [
+								{
+									"name": "Positivos",
+									"item": [
+										{
+											"name": "Realizar o Login (sem variável)",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 200\", function () {\r",
+															"    pm.response.to.have.status(200);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (OK)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"OK\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"// Validar se os atributos existem (message, authorization)\r",
+															"const atributos = ['message', 'authorization']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"Login realizado com sucesso\");});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"email\": \"beltrano@qa.com.br\",\r\n  \"password\": \"teste\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseURL}}/login",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"login"
+													]
+												},
+												"description": "Requisição feita exclusivamente para efetuar um login sem o uso de nenhuma variável de ambiente.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/22794fc6-12f8-4418-b699-34bd20b5016a/aW1hZ2UucG5n\" alt=\"\" height=\"295\" width=\"288\">"
+											},
+											"response": []
+										},
+										{
+											"name": "Realizar o Login (com variável)",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 200\", function () {\r",
+															"    pm.response.to.have.status(200);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (OK)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"OK\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"Login realizado com sucesso\");});\r",
+															"\r",
+															"// Validar se os atributos existem (message, authorization)\r",
+															"const atributos = ['message', 'authorization']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"email\": \"{{emailValido}}\",\r\n  \"password\": \"{{senhaValida}}\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseURL}}/login",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"login"
+													]
+												},
+												"description": "Requisição feita exclusivamente para efetuar um login com o uso de uma variável de ambiente.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/836c57a9-e71e-4517-b9d6-9fc016b79d62/aW1hZ2UucG5n\" alt=\"\" height=\"294\" width=\"284\">"
+											},
+											"response": []
+										}
+									],
+									"description": "Pasta abrigando as requisições positivas do verbo POST na rota /login."
+								},
+								{
+									"name": "Negativos",
+									"item": [
+										{
+											"name": "Realizar o Login (sem body)",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 400\", function () {\r",
+															"    pm.response.to.have.status(400);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (Bad Request)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"Bad Request\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"email é obrigatório\",\"password é obrigatório\");});\r",
+															"\r",
+															"// Validar se os atributos existem (email, password)\r",
+															"const atributos = ['email', 'password']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{baseURL}}/login",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"login"
+													]
+												},
+												"description": "Realizando o teste para a requisição retornar um resultado sem o body.\n\nResultado (não consta no swagger):\n\n<img src=\"https://content.pstmn.io/e2694143-0c3f-4078-a5e1-f03991f495a6/aW1hZ2UucG5n\" alt=\"\" height=\"136\" width=\"263\">"
+											},
+											"response": []
+										},
+										{
+											"name": "Realizar o Login (e-mail vazio)",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 400\", function () {\r",
+															"    pm.response.to.have.status(400);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (Bad Request)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"Bad Request\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"email não pode ficar em branco\");});\r",
+															"\r",
+															"// Validar se os atributos existem (email)\r",
+															"const atributos = ['email']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"email\": \"\",\r\n  \"password\": \"teste\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseURL}}/login",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"login"
+													]
+												},
+												"description": "Realizando o teste para a requisição retornar um resultado perante um e-mail (campo) vazio.\n\nResultado (não consta no swagger):\n\n<img src=\"https://content.pstmn.io/9c55c3f6-8244-4c1c-8f6d-7372492c64d3/aW1hZ2UucG5n\" alt=\"\" height=\"122\" width=\"302\">"
+											},
+											"response": []
+										},
+										{
+											"name": "Realizar o Login (e-mail inválido - variável)",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 400\", function () {\r",
+															"    pm.response.to.have.status(400);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (Bad Request)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"Bad Request\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"email deve ser um email válido\");});\r",
+															"\r",
+															"// Validar se os atributos existem (email)\r",
+															"const atributos = ['email']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"email\": \"{{userName_1}}\",\r\n  \"password\": \"teste\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseURL}}/login",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"login"
+													]
+												},
+												"description": "Realizando o teste para a requisição retornar um resultado perante um e-mail (campo) inválido.\n\nResultado (não consta no swagger):\n\n<img src=\"https://content.pstmn.io/e6bce6dc-df37-4341-b470-0b4444d026d8/aW1hZ2UucG5n\" width=\"301\" height=\"118\">"
+											},
+											"response": []
+										},
+										{
+											"name": "Realizar o Login (senha vazia)",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 400\", function () {\r",
+															"    pm.response.to.have.status(400);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (Bad Request)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"Bad Request\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"password não pode ficar em branco\");});\r",
+															"\r",
+															"// Validar se os atributos existem (password)\r",
+															"const atributos = ['password']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"email\": \"fulano@qa.com\",\r\n  \"password\": \"\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseURL}}/login",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"login"
+													]
+												},
+												"description": "Realizando o teste para a requisição retornar um resultado diante a um campo (senha) vazia.\n\nResultado (não consta no swagger):\n\n<img src=\"https://content.pstmn.io/3e6e69f2-124c-442e-8584-f47b827b4525/aW1hZ2UucG5n\" alt=\"\" height=\"137\" width=\"288\">"
+											},
+											"response": []
+										},
+										{
+											"name": "Realizar o Login (senha inválida)",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 401\", function () {\r",
+															"    pm.response.to.have.status(401);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (Unauthorized)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"Unauthorized\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"Email e/ou senha inválidos\");});\r",
+															"\r",
+															"// Validar se os atributos existem (message)\r",
+															"const atributos = ['message']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"email\": \"fulano@qa.com\",\r\n  \"password\": \"senhainválida\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseURL}}/login",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"login"
+													]
+												},
+												"description": "Realizando o teste para a requisição retornar um resultado diante a um campo (senha) inválida.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/673841e7-8ffe-40a4-9122-29c6ba490b6c/aW1hZ2UucG5n\" alt=\"\" height=\"119\" width=\"289\">"
+											},
+											"response": []
+										}
+									],
+									"description": "Pasta abrigando as requisições negativas do verbo POST na rota /login."
+								}
+							],
+							"description": "Verbo principal e único da rota de /login.\n\nDescrição ServeRest: A duração do token retornado em authorization é de 600 segundos (10 minutos). Caso esteja expirado irá receber status code 401 (Unauthorized)."
+						}
+					],
+					"description": "Descrição ServeRest: Autentique o seu usuário para montar um carrinho e, se for administrador, gerenciar os produtos.\n\n<img src=\"https://content.pstmn.io/fec5cd8c-83fd-4470-b8c5-601124c4043a/aW1hZ2UucG5n\" alt=\"Rota%20de%20/login%20para%20poder%20fazer%20o%20mesmo%20com%20o%20usuário%20registrado.\" height=\"298\" width=\"331\">"
+				},
+				{
+					"name": "/usuarios",
+					"item": [
+						{
+							"name": "GET",
+							"item": [
+								{
+									"name": "Positivos",
+									"item": [
+										{
+											"name": "Listar os Usuários",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 200\", function () {\r",
+															"    pm.response.to.have.status(200);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (OK)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"OK\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"// Validar se os atributos existem (quantidade, usuarios)\r",
+															"const atributos = ['quantidade', 'usuarios']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseURL}}/usuarios",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"usuarios"
+													]
+												},
+												"description": "Requisição responsável por listar todos os usuários cadastrados da rota de /usuarios.\n\nResposta:\n\n<img src=\"https://content.pstmn.io/441bcb0a-02b8-48e0-b24a-9491d5334bb4/aW1hZ2UucG5n\" alt=\"Um%20número%20de%20usuários%20um%20pouco%20grandes%20por%20conta%20dos%20meus%20testes%20extensivos.\" width=\"246\" height=\"259\">"
+											},
+											"response": []
+										},
+										{
+											"name": "Buscar Usuário por ID",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 200\", function () {\r",
+															"    pm.response.to.have.status(200);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (OK)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"OK\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"// Validar se os atributos existem (quantidade, usuarios)\r",
+															"const atributos = ['quantidade', 'usuarios']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseURL}}/usuarios/0uxuPY0cbmQhpEz1",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"usuarios",
+														"0uxuPY0cbmQhpEz1"
+													]
+												},
+												"description": "Requisição responsável por listar todos os usuários por ID cadastrados da rota de /usuarios.\n\nRespostas:\n\n<img src=\"https://content.pstmn.io/0d419b83-8f8c-4fcd-bc38-54ed945b1694/aW1hZ2UucG5n\" alt=\"\" height=\"191\" width=\"189\">"
+											},
+											"response": []
+										}
+									],
+									"description": "Pasta abrigando as requisições positivas do verbo GET na rota /usuarios."
+								},
+								{
+									"name": "Negativos",
+									"item": [
+										{
+											"name": "Listar os Usuários (rota errada)",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 405\", function () {\r",
+															"    pm.response.to.have.status(405);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (Method Not Allowed)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"Method Not Allowed\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"Não é possível realizar GET em /usuario. Acesse http://localhost:3000 para ver as rotas disponíveis e como utilizá-las.\");});\r",
+															"\r",
+															"// Validar se os atributos existem (message)\r",
+															"const atributos = ['message']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseURL}}/usuario",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"usuario"
+													]
+												},
+												"description": "Realizando o teste para a requisição retornar um resultado diante uma rota inválida.\n\nResultado (não consta no swagger):\n\n<img src=\"https://content.pstmn.io/189ba950-5b91-49d0-8431-6eb0cee859f1/aW1hZ2UucG5n\" width=\"357\" height=\"171\">"
+											},
+											"response": []
+										},
+										{
+											"name": "Buscar Usuário (usuário inexistente)",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 400\", function () {\r",
+															"    pm.response.to.have.status(400);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (Bad Request)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"Bad Request\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"Usuário não encontrado\");});\r",
+															"\r",
+															"// Validar se os atributos existem (message)\r",
+															"const atributos = ['message']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseURL}}/usuarios/testeerrado",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"usuarios",
+														"testeerrado"
+													]
+												},
+												"description": "Realizando o teste para a requisição retornar um resultado diante um usuário inválido.\n\nResultado (não consta no swagger):\n\n<img src=\"https://content.pstmn.io/b8886565-17c7-4ceb-b47c-681551bb045b/aW1hZ2UucG5n\" alt=\"\" height=\"120\" width=\"259\">"
+											},
+											"response": []
+										}
+									],
+									"description": "Pasta abrigando as requisições negativas do verbo GET na rota /usuarios."
+								}
+							],
+							"description": "Verbo responsável por listar e buscar usuários da rota de /usuarios."
+						},
+						{
+							"name": "POST",
+							"item": [
+								{
+									"name": "Positivos",
+									"item": [
+										{
+											"name": "Cadastrar Usuário",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"// Setar a variável\r",
+															"pm.environment.set(\"id\",responseJson[\"_id\"])\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 201\", function () {\r",
+															"    pm.response.to.have.status(201);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (criado)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"Created\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"Cadastro realizado com sucesso\");});\r",
+															"\r",
+															"// Validar se os atributos existem (message, _id)\r",
+															"const atributos = ['message', '_id']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"nome\": \"{{$randomUserName}}\",\r\n  \"email\": \"{{$randomEmail}}\",\r\n  \"password\": \"{{$randomPassword}}\",\r\n  \"administrador\": \"{{$randomBoolean}}\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseURL}}/usuarios",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"usuarios"
+													]
+												},
+												"description": "Requisição responsável por cadastrar um usuário na rota de /usuarios.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/7cc7c03f-dcc4-403a-ad7b-f773adee2c89/aW1hZ2UucG5n\" alt=\"\" height=\"159\" width=\"252\">"
+											},
+											"response": []
+										}
+									],
+									"description": "Pasta abrigando as requisições positivas do verbo POST na rota /usuarios."
+								},
+								{
+									"name": "Negativos",
+									"item": [
+										{
+											"name": "Cadastrar Usuário (e-mail repetido)",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 400\", function () {\r",
+															"    pm.response.to.have.status(400);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (Bad Request)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"Bad Request\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"Este email já está sendo usado\");});\r",
+															"\r",
+															"// Validar se os atributos existem (message)\r",
+															"const atributos = ['message']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"nome\": \"{{$randomUserName}}\",\r\n  \"email\": \"Cordelia50@yahoo.com\",\r\n  \"password\": \"{{$randomPassword}}\",\r\n  \"administrador\": \"{{$randomBoolean}}\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseURL}}/usuarios",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"usuarios"
+													]
+												},
+												"description": "Realizando um teste para a requisição retornar um resultado diante um campo (e-mail) repetido.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/7ea8b932-3d45-49c5-8fdc-fd4c538c86be/aW1hZ2UucG5n\" alt=\"\" height=\"122\" width=\"324\">"
+											},
+											"response": []
+										}
+									],
+									"description": "Pasta abrigando as requisições negativas do verbo POST na rota /usuarios."
+								}
+							],
+							"description": "Verbo responsável por cadastrar os usuários da rota /usuarios."
+						},
+						{
+							"name": "DELETE",
+							"item": [
+								{
+									"name": "Positivos",
+									"item": [
+										{
+											"name": "Deletar Usuário por ID",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 200\", function () {\r",
+															"    pm.response.to.have.status(200);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (OK)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"OK\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"// Validar se os atributos existem (message)\r",
+															"const atributos = ['message']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseURL}}/usuarios/sca94WrwzSBWZ1Nl",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"usuarios",
+														"sca94WrwzSBWZ1Nl"
+													]
+												},
+												"description": "Requisição responsável por deletar um usuário por ID na rota de /usuarios.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/58259446-e607-45bf-ae5a-348938ed638f/aW1hZ2UucG5n\" alt=\"\" height=\"121\" width=\"316\">"
+											},
+											"response": []
+										}
+									],
+									"description": "Pasta abrigando as requisições positivas do verbo DELETE na rota /usuarios."
+								},
+								{
+									"name": "Negativos",
+									"item": [
+										{
+											"name": "Deletar Usuário por ID (aleatório)",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 200\", function () {\r",
+															"    pm.response.to.have.status(200);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (OK)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"OK\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"// Validar se os atributos existem (message)\r",
+															"const atributos = ['message']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseURL}}/usuarios/testeerrado",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"usuarios",
+														"testeerrado"
+													]
+												},
+												"description": "Realizando um teste na requisição mediante a um usuário inexistente.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/5d035162-67a2-41a3-958c-f1fda6084031/aW1hZ2UucG5n\" alt=\"\" height=\"115\" width=\"269\">"
+											},
+											"response": []
+										}
+									],
+									"description": "Pasta abrigando as requisições negativas do verbo DELETE na rota /usuarios."
+								}
+							],
+							"description": "Verbo responsável por deletar usuário por ID na rota de /usuarios."
+						},
+						{
+							"name": "PUT",
+							"item": [
+								{
+									"name": "Positivos",
+									"item": [
+										{
+											"name": "Editar Usuário por ID",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 200\", function () {\r",
+															"    pm.response.to.have.status(200);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (OK)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"OK\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"\r",
+															"// Validar se os atributos existem (message)\r",
+															"const atributos = ['message']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"nome\": \"Fulano\",\r\n    \"email\": \"fulano@qa.com\",\r\n    \"password\": \"teste\",\r\n    \"administrador\": \"true\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseURL}}/usuarios/0uxuPY0cbmQhpEz1",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"usuarios",
+														"0uxuPY0cbmQhpEz1"
+													]
+												},
+												"description": "Requisição responsável por editar um usuário por ID dentro da rota /usuarios.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/29d4ff65-53ec-459d-a73b-a3740dfd24ce/aW1hZ2UucG5n\" alt=\"\" height=\"129\" width=\"312\">"
+											},
+											"response": []
+										}
+									],
+									"description": "Pasta abrigando as requisições positivas do verbo PUT na rota /usuarios."
+								},
+								{
+									"name": "Negativos",
+									"item": [
+										{
+											"name": "Editar Usuário (informações em branco/incorretas)",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 400\", function () {\r",
+															"    pm.response.to.have.status(400);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (Bad Request)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"Bad Request\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"nome não pode ficar em branco\", \"email não pode ficar em branco\");});\r",
+															"    pm.expect(pm.response.text()).to.include(\"password não pode ficar em branco\", \"administrador deve ser 'true' ou 'false'\");\r",
+															"\r",
+															"// Validar se os atributos existem (nome, email, password, administrador)\r",
+															"const atributos = ['nome', 'email', 'password', 'administrador']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n\"nome\": \"\",\r\n\"email\": \"\",\r\n\"password\": \"\",\r\n\"administrador\": \"\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseURL}}/usuarios/testerrado",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"usuarios",
+														"testerrado"
+													]
+												},
+												"description": "Realizando um teste na requisição a partir de vários campos vazios e/ou incorretos.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/4a4b57b8-768c-4a3c-92eb-7248affa15ea/aW1hZ2UucG5n\" alt=\"\" height=\"198\" width=\"354\">"
+											},
+											"response": []
+										}
+									],
+									"description": "Pasta abrigando as requisições positivas do verbo PUT na rota /usuarios."
+								}
+							],
+							"description": "Verbo responsável por editar os usuários por ID na rota de /usuários."
+						}
+					],
+					"description": "Descrição ServeRest: Gerencie os usuários, consulte dados para login e cadastre administrador\n\n<img src=\"https://content.pstmn.io/a546b7a4-46a3-4139-99e4-e723f27e4c6b/aW1hZ2UucG5n\" alt=\"Rota%20de%20/usuarios%20responsável%20por%20listar,%20cadastrar,%20deletar%20e%20editar%20usuários.\" width=\"380\" height=\"637\">"
+				},
+				{
+					"name": "/produtos",
+					"item": [
+						{
+							"name": "GET",
+							"item": [
+								{
+									"name": "Positivos",
+									"item": [
+										{
+											"name": "Listar Produtos",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 200\", function () {\r",
+															"    pm.response.to.have.status(200);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (OK)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"OK\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"// Validar se os atributos existem (quantidade, produtos)\r",
+															"const atributos = ['quantidade', 'produtos']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseURL}}/produtos",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"produtos"
+													]
+												},
+												"description": "Requisição responsável por listar todos os produtos cadastrados dentro da rota /produtos.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/2feae40a-2d86-466a-9177-177b13c9ab63/aW1hZ2UucG5n\" alt=\"Número%20alto%20por%20conta%20da%20quantidade%20de%20testes%20rodados.\" height=\"260\" width=\"308\">"
+											},
+											"response": []
+										},
+										{
+											"name": "Buscar Produto por ID",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 200\", function () {\r",
+															"    pm.response.to.have.status(200);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (OK)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"OK\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"// Validar se os atributos existem (quantidade, produtos)\r",
+															"const atributos = ['quantidade', 'produtos']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseURL}}/produtos/",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"produtos",
+														""
+													]
+												},
+												"description": "Requisição responsável por editar produtos por ID na rota de /produtos.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/3ec9b92f-9a8b-48f6-8ab1-9c93097bfe45/aW1hZ2UucG5n\" alt=\"\" height=\"187\" width=\"251\">"
+											},
+											"response": []
+										}
+									],
+									"description": "Pasta abrigando as requisições positivas do verbo GET na rota /produtos."
+								},
+								{
+									"name": "Negativos",
+									"item": [
+										{
+											"name": "Listar Produtos (produto inválido)",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 400\", function () {\r",
+															"    pm.response.to.have.status(400);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (Bad Request)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"Bad Request\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"Produto não encontrado\");});\r",
+															"\r",
+															"// Validar se os atributos existem (message)\r",
+															"const atributos = ['message']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseURL}}/produtos/mousegamer",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"produtos",
+														"mousegamer"
+													]
+												},
+												"description": "Realizando um teste na requisição a partir de um produto inválido.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/ed018498-d320-42ed-8ab2-ca9974d8175c/aW1hZ2UucG5n\" alt=\"\" height=\"121\" width=\"255\">"
+											},
+											"response": []
+										},
+										{
+											"name": "Buscar Produto por ID (rota inválida)",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 405\", function () {\r",
+															"    pm.response.to.have.status(405);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (OK)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"Method Not Allowed\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"Não é possível realizar GET em /prod. Acesse http://localhost:3000 para ver as rotas disponíveis e como utilizá-las.\");});\r",
+															"\r",
+															"// Validar se os atributos existem (quantidade, produtos)\r",
+															"const atributos = ['message']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseURL}}/prod",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"prod"
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"description": "Pasta abrigando as requisições negativas do verbo GET na rota /produtos."
+								}
+							],
+							"description": "Verbo responsável por listar e buscar produtos da rota de /produtos."
+						},
+						{
+							"name": "POST",
+							"item": [
+								{
+									"name": "Positivos",
+									"item": [
+										{
+											"name": "Cadastrar Produto",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 201\", function () {\r",
+															"    pm.response.to.have.status(201);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (criado)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"Created\");});\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"Cadastro realizado com sucesso\");});\r",
+															"\r",
+															"// Validar se os atributos existem (message, _id)\r",
+															"const atributos = ['message', '_id']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"const url = pm.environment.get('baseURL')\r",
+															"\r",
+															"const postRequest = {\r",
+															"    url: `${url}/login`,\r",
+															"    method: 'POST',\r",
+															"    header: {\r",
+															"        'Content-Type': 'application/json'\r",
+															"    },\r",
+															"    body: {\r",
+															"        mode: 'raw',\r",
+															"        raw: JSON.stringify({\r",
+															"            \"email\": \"beltrano@qa.com.br\",\r",
+															"            \"password\": \"teste\"\r",
+															"        })\r",
+															"    }\r",
+															"}\r",
+															"\r",
+															"pm.sendRequest(postRequest, (err, response) => {\r",
+															"    const res = response.json()\r",
+															"    try {\r",
+															"        pm.environment.set('token', res.authorization.slice(7))\r",
+															"    } catch {\r",
+															"        console.warn('FAIL')\r",
+															"    }\r",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"nome\": \"{{$randomProductName}}\",\r\n  \"preco\": 50,\r\n  \"descricao\": \"{{$randomProductMaterial}}\",\r\n  \"quantidade\": 20\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseURL}}/produtos",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"produtos"
+													]
+												},
+												"description": "Verbo responsável por cadastrar os produtos da rota /produtos.\n\nResposta:\n\n<img src=\"https://content.pstmn.io/6ec8ffb6-bf60-4661-96d0-099ebdaa150e/aW1hZ2UucG5n\" alt=\"\" height=\"139\" width=\"324\">"
+											},
+											"response": []
+										}
+									],
+									"description": "StartFragment\n\nPasta abrigando as requisições positivas do verbo GET na rota /produtos.\n\nEndFragment"
+								},
+								{
+									"name": "Negativos",
+									"item": [
+										{
+											"name": "Cadastrar Produto (produto repetido)",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 400\", function () {\r",
+															"    pm.response.to.have.status(400);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (Bad Request)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"Bad Request\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"_id não é permitido\");});\r",
+															"\r",
+															"// Validar se os atributos existem (_id)\r",
+															"const atributos = ['_id']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"const url = pm.environment.get('baseURL')\r",
+															"\r",
+															"const postRequest = {\r",
+															"    url: `${url}/login`,\r",
+															"    method: 'POST',\r",
+															"    header: {\r",
+															"        'Content-Type': 'application/json'\r",
+															"    },\r",
+															"    body: {\r",
+															"        mode: 'raw',\r",
+															"        raw: JSON.stringify({\r",
+															"            \"email\": \"beltrano@qa.com.br\",\r",
+															"            \"password\": \"teste\"\r",
+															"        })\r",
+															"    }\r",
+															"}\r",
+															"\r",
+															"pm.sendRequest(postRequest, (err, response) => {\r",
+															"    const res = response.json()\r",
+															"    try {\r",
+															"        pm.environment.set('token', res.authorization.slice(7))\r",
+															"    } catch {\r",
+															"        console.warn('FAIL')\r",
+															"    }\r",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"nome\": \"Handcrafted Cotton Tuna\",\r\n    \"preco\": 50,\r\n    \"descricao\": \"Metal\",\r\n    \"quantidade\": 20,\r\n    \"_id\": \"7qAauWOxZ81slj6F\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseURL}}/produtos",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"produtos"
+													]
+												},
+												"description": "Realizando um teste na requisição a partir de um produto repetido.\n\nResultado (não consta no swagger):\n\n<img src=\"https://content.pstmn.io/c900c3f2-64cd-425c-9374-af1a1e9d7a42/aW1hZ2UucG5n\" alt=\"\" height=\"125\" width=\"215\">"
+											},
+											"response": []
+										}
+									],
+									"description": "Pasta abrigando as requisições negativas do verbo GET na rota /produtos."
+								}
+							],
+							"description": "Pasta abrigando as requisições positivas do verbo POST na rota /produtos."
+						},
+						{
+							"name": "DELETE",
+							"item": [
+								{
+									"name": "Positivos",
+									"item": [
+										{
+											"name": "Deletar Produto por ID",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 200\", function () {\r",
+															"    pm.response.to.have.status(200);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (OK)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"OK\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"// Validar se os atributos existem (message)\r",
+															"const atributos = ['message']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseURL}}/produtos/wTf5Ouj69c6Gk7bI",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"produtos",
+														"wTf5Ouj69c6Gk7bI"
+													]
+												},
+												"description": "Requisição responsável por deletar um produto por ID da rota /produtos.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/ee38f231-9143-4b2c-939d-9be5e8f739e4/aW1hZ2UucG5n\" alt=\"\" height=\"119\" width=\"307\">"
+											},
+											"response": []
+										}
+									],
+									"description": "Pasta abrigando as requisições positivas do verbo DELETE na rota /produtos."
+								},
+								{
+									"name": "Negativos",
+									"item": [
+										{
+											"name": "Deletar Produto (rota inválida)",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 405\", function () {\r",
+															"    pm.response.to.have.status(405);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (Method Not Allowed)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"Method Not Allowed\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"Não é possível realizar DELETE em /produtos/. Acesse http://localhost:3000 para ver as rotas disponíveis e como utilizá-las.\");});\r",
+															"\r",
+															"// Validar se os atributos existem (message)\r",
+															"const atributos = ['message']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseURL}}/produtos/",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"produtos",
+														""
+													]
+												},
+												"description": "Realizando um teste na requisição a partir de uma rota inválida.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/12b4bc51-679c-4e0b-a64a-ac607312b613/aW1hZ2UucG5n\" alt=\"\" height=\"153\" width=\"359\">"
+											},
+											"response": []
+										}
+									],
+									"description": "Pasta abrigando as requisições negativas do verbo DELETE na rota /produtos."
+								}
+							],
+							"description": "Verbo responsável por deletar os produtos por ID na rota de /produtos."
+						},
+						{
+							"name": "PUT",
+							"item": [
+								{
+									"name": "Positivos",
+									"item": [
+										{
+											"name": "Editar Produtos por ID",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 200\", function () {\r",
+															"    pm.response.to.have.status(200);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (OK)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"OK\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"// Validar se os atributos existem (message)\r",
+															"const atributos = ['message']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"nome\": \"Logitech MX Vertical\",\r\n  \"preco\": 470,\r\n  \"descricao\": \"Mouse\",\r\n  \"quantidade\": 381\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseURL}}/produtos/BeeJh5lz3k6kSIzA",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"produtos",
+														"BeeJh5lz3k6kSIzA"
+													]
+												},
+												"description": "Requisição responsável por editar produtos por ID na rota de /produtos.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/b774bd89-413e-4a24-a6f7-7b6af1fa64c5/aW1hZ2UucG5n\" alt=\"\" height=\"123\" width=\"304\">"
+											},
+											"response": []
+										}
+									],
+									"description": "Pasta abrigando as requisições positivas do verbo PUT na rota /produtos."
+								},
+								{
+									"name": "Negativos",
+									"item": [
+										{
+											"name": "Editar Produtos por ID (rota inválida)",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 405\", function () {\r",
+															"    pm.response.to.have.status(405);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (Method Not Allowed)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"Method Not Allowed\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"Não é possível realizar PUT em /produtos. Acesse http://localhost:3000 para ver as rotas disponíveis e como utilizá-las.\");});\r",
+															"\r",
+															"// Validar se os atributos existem (message)\r",
+															"const atributos = ['message']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"nome\": \"Logitech MX Vertical\",\r\n  \"preco\": 470,\r\n  \"descricao\": \"Mouse\",\r\n  \"quantidade\": 381\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseURL}}/produtos",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"produtos"
+													]
+												},
+												"description": "Realizando um teste na requisição a partir de uma rota inválida.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/ae341f62-945f-4e81-9a2c-d228cf941d38/aW1hZ2UucG5n\" alt=\"\" height=\"159\" width=\"359\">"
+											},
+											"response": []
+										}
+									],
+									"description": "Pasta abrigando as requisições negativas do verbo PUT na rota /produtos."
+								}
+							],
+							"description": "Verbo responsável por editar os produtos por ID na rota de /produtos."
+						}
+					],
+					"description": "Descrição ServeRest: Consulte produtos cadastrados ou, como administrador, gerencie os produtos da loja.\n\n<img src=\"https://content.pstmn.io/82501065-fbbe-471b-be5f-c7f29d1113c0/aW1hZ2UucG5n\" alt=\"Rota%20responsável%20por%20listar,%20buscar,%20cadastrar,%20deletar%20e%20editar%20produtos.\" height=\"639\" width=\"285\">"
+				},
+				{
+					"name": "/carrinho",
+					"item": [
+						{
+							"name": "GET",
+							"item": [
+								{
+									"name": "Positivos",
+									"item": [
+										{
+											"name": "Listar Carrinhos",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 200\", function () {\r",
+															"    pm.response.to.have.status(200);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (OK)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"OK\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"// Validar se os atributos existem (quantidade, carrinhos)\r",
+															"const atributos = ['quantidade', 'carrinhos']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseURL}}/carrinhos",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"carrinhos"
+													]
+												},
+												"description": "Rota responsável por listar os carrinhos cadastrados.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/263d5700-6145-4377-a577-320370a27604/aW1hZ2UucG5n\" alt=\"\" height=\"297\" width=\"284\">"
+											},
+											"response": []
+										},
+										{
+											"name": "Listar Carrinhos por ID",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 200\", function () {\r",
+															"    pm.response.to.have.status(200);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (OK))\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"OK\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"// Validar se os atributos existem (produtos)\r",
+															"const atributos = ['produtos']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseURL}}/carrinhos/qbMqntef4iTOwWfg",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"carrinhos",
+														"qbMqntef4iTOwWfg"
+													]
+												},
+												"description": "Rota responsável por listar os carrinhos cadastrados a partir do ID do usuário.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/02730b06-00ef-4dd1-a605-e90a3ec0839a/aW1hZ2UucG5n\" alt=\"\" height=\"341\" width=\"252\">"
+											},
+											"response": []
+										}
+									],
+									"description": "Pasta abrigando as requisições positivas do verbo GET na rota /carrinhos."
+								},
+								{
+									"name": "Negativos",
+									"item": [
+										{
+											"name": "Listar Carrinhos (rota errada)",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 405\", function () {\r",
+															"    pm.response.to.have.status(405);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (Method Not Allowed)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"Method Not Allowed\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"Não é possível realizar GET em /carrinho. Acesse http://localhost:3000 para ver as rotas disponíveis e como utilizá-las.\");});\r",
+															"\r",
+															"// Validar se os atributos existem (message)\r",
+															"const atributos = ['message']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseURL}}/carrinho",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"carrinho"
+													]
+												},
+												"description": "Realizando um teste na requisição a partir de uma rota errada.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/e84d9ebd-7ae8-49c4-98ce-79f26fe9ac13/aW1hZ2UucG5n\" alt=\"\" height=\"160\" width=\"361\">"
+											},
+											"response": []
+										},
+										{
+											"name": "Listar Carrinhos (carrinho inválido)",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 400\", function () {\r",
+															"    pm.response.to.have.status(400);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (Bad Request)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"Bad Request\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"Carrinho não encontrado\");});\r",
+															"\r",
+															"// Validar se os atributos existem (message)\r",
+															"const atributos = ['message']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseURL}}/carrinhos/testeerradooo",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"carrinhos",
+														"testeerradooo"
+													]
+												},
+												"description": "Realizando um teste na requisição a partir de um carrinho inválido.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/750222ab-1e91-48df-b0b5-0521ba48ecae/aW1hZ2UucG5n\" alt=\"\" height=\"122\" width=\"266\">"
+											},
+											"response": []
+										}
+									],
+									"description": "Pasta abrigando as requisições negativas do verbo GET na rota /carrinhos."
+								}
+							],
+							"description": "Verbo responsável por listar os carrinhos tanto por usuário logado como por ID (usuário) da rota de /carrinhos"
+						},
+						{
+							"name": "POST",
+							"item": [
+								{
+									"name": "Positivos",
+									"item": [
+										{
+											"name": "Cadastrar Carrinho",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 201\", function () {\r",
+															"    pm.response.to.have.status(201);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (criado)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"Created\");});\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"Cadastro realizado com sucesso\");});\r",
+															"\r",
+															"// Validar se os atributos existem (message, _id)\r",
+															"const atributos = ['message', '_id']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"const url = pm.environment.get('baseURL')\r",
+															"\r",
+															"const postRequest = {\r",
+															"    url: `${url}/login`,\r",
+															"    method: 'POST',\r",
+															"    header: {\r",
+															"        'Content-Type': 'application/json'\r",
+															"    },\r",
+															"    body: {\r",
+															"        mode: 'raw',\r",
+															"        raw: JSON.stringify({\r",
+															"            \"email\": \"beltrano@qa.com.br\",\r",
+															"            \"password\": \"teste\"\r",
+															"        })\r",
+															"    }\r",
+															"}\r",
+															"\r",
+															"pm.sendRequest(postRequest, (err, response) => {\r",
+															"    const res = response.json()\r",
+															"    try {\r",
+															"        pm.environment.set('token', res.authorization.slice(7))\r",
+															"    } catch {\r",
+															"        console.warn('FAIL')\r",
+															"    }\r",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"produtos\": [\r\n    {\r\n      \"idProduto\": \"K6leHdftCeOJj8BJ\",\r\n      \"quantidade\": 1\r\n    }\r\n  ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseURL}}/carrinhos",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"carrinhos"
+													]
+												},
+												"description": "Requisição responsável por cadastrar um carrinho na rota de /carrinhos.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/4cbdea8e-fc8e-4a2b-8250-2789319cd06a/aW1hZ2UucG5n\" alt=\"\" height=\"145\" width=\"322\">"
+											},
+											"response": []
+										}
+									],
+									"description": "Pasta abrigando as requisições positivas do verbo POST na rota /carrinhos."
+								},
+								{
+									"name": "Negativos",
+									"item": [
+										{
+											"name": "Cadastrar Carrinho (produto inválido)",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 400\", function () {\r",
+															"    pm.response.to.have.status(400);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (Bad Request)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"Bad Request\");});\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"Produto não encontrado\");});\r",
+															"\r",
+															"// Validar se os atributos existem (message, item)\r",
+															"const atributos = ['message', 'item']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"const url = pm.environment.get('baseURL')\r",
+															"\r",
+															"const postRequest = {\r",
+															"    url: `${url}/login`,\r",
+															"    method: 'POST',\r",
+															"    header: {\r",
+															"        'Content-Type': 'application/json'\r",
+															"    },\r",
+															"    body: {\r",
+															"        mode: 'raw',\r",
+															"        raw: JSON.stringify({\r",
+															"            \"email\": \"Cordelia50@yahoo.com\",\r",
+															"            \"password\": \"gKn_IAfxqSzzbLD\"\r",
+															"        })\r",
+															"    }\r",
+															"}\r",
+															"\r",
+															"pm.sendRequest(postRequest, (err, response) => {\r",
+															"    const res = response.json()\r",
+															"    try {\r",
+															"        pm.environment.set('token', res.authorization.slice(7))\r",
+															"    } catch {\r",
+															"        console.warn('FAIL')\r",
+															"    }\r",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"produtos\": [\r\n    {\r\n      \"idProduto\": \"fIfA5nZXbzjczTZL\",\r\n      \"quantidade\": 1\r\n    }\r\n  ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseURL}}/carrinhos",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"carrinhos"
+													]
+												},
+												"description": "Realizando um teste na requisição a partir de um produto inválido.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/7178f78f-faf9-40a8-9dbe-1cf3e2593e45/aW1hZ2UucG5n\" width=\"268\" height=\"202\">"
+											},
+											"response": []
+										},
+										{
+											"name": "Cadastrar outro Carrinho (quantidade de carrinhos ultrapassada)",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 400\", function () {\r",
+															"    pm.response.to.have.status(400);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (Bad Request)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"Bad Request\");});\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"Não é permitido ter mais de 1 carrinho\");});\r",
+															"\r",
+															"// Validar se os atributos existem (message, _id)\r",
+															"const atributos = ['message']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"const url = pm.environment.get('baseURL')\r",
+															"\r",
+															"const postRequest = {\r",
+															"    url: `${url}/login`,\r",
+															"    method: 'POST',\r",
+															"    header: {\r",
+															"        'Content-Type': 'application/json'\r",
+															"    },\r",
+															"    body: {\r",
+															"        mode: 'raw',\r",
+															"        raw: JSON.stringify({\r",
+															"            \"email\": \"Eusebio.MacGyver37@yahoo.com\",\r",
+															"            \"password\": \"Pc8FuYx15rnNN_K\"\r",
+															"        })\r",
+															"    }\r",
+															"}\r",
+															"\r",
+															"pm.sendRequest(postRequest, (err, response) => {\r",
+															"    const res = response.json()\r",
+															"    try {\r",
+															"        pm.environment.set('token', res.authorization.slice(7))\r",
+															"    } catch {\r",
+															"        console.warn('FAIL')\r",
+															"    }\r",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n  \"produtos\": [\r\n    {\r\n      \"idProduto\": \"BeeJh5lz3k6kSIzA\",\r\n      \"quantidade\": 2\r\n    }\r\n  ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseURL}}/carrinhos",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"carrinhos"
+													]
+												},
+												"description": "Realizando um teste na requisição a partir de um uma quantidade de carrinhos além do limite.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/ed307191-1148-4745-936a-3d62fd276352/aW1hZ2UucG5n\" alt=\"\" height=\"135\" width=\"303\">"
+											},
+											"response": []
+										},
+										{
+											"name": "Cadastrar Carrinho (sem body)",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"//Variáveis\r",
+															"const responseJson = pm.response.json()\r",
+															"\r",
+															"\r",
+															"//Validar o Status Code\r",
+															"pm.test(\"Validando Status Code: 400\", function () {\r",
+															"    pm.response.to.have.status(400);});\r",
+															"\r",
+															"//Validar se o Status Code retorna uma string (Bad Request)\r",
+															"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+															"    pm.response.to.have.status(\"Bad Request\");});\r",
+															"\r",
+															"// Validação Tempo de Resposta\r",
+															"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+															"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+															"\r",
+															"//Validar o valor da variável (ao caso, uma string)\r",
+															"pm.test(\"Validação que há um campo: String\", function () {\r",
+															"    pm.expect(pm.response.text()).to.include(\"produtos é obrigatório\");});\r",
+															"\r",
+															"// Validar se os atributos existem (produtos)\r",
+															"const atributos = ['produtos']\r",
+															"atributos.forEach((atributo) => {\r",
+															"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+															"        pm.expect(responseJson[atributo]).to.exist})})"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"const url = pm.environment.get('baseURL')\r",
+															"\r",
+															"const postRequest = {\r",
+															"    url: `${url}/login`,\r",
+															"    method: 'POST',\r",
+															"    header: {\r",
+															"        'Content-Type': 'application/json'\r",
+															"    },\r",
+															"    body: {\r",
+															"        mode: 'raw',\r",
+															"        raw: JSON.stringify({\r",
+															"            \"email\": \"Josiane.Senger@hotmail.com\",\r",
+															"            \"password\": \"78JnC43CdlsZzNs\"\r",
+															"        })\r",
+															"    }\r",
+															"}\r",
+															"\r",
+															"pm.sendRequest(postRequest, (err, response) => {\r",
+															"    const res = response.json()\r",
+															"    try {\r",
+															"        pm.environment.set('token', res.authorization.slice(7))\r",
+															"    } catch {\r",
+															"        console.warn('FAIL')\r",
+															"    }\r",
+															"})"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseURL}}/carrinhos",
+													"host": [
+														"{{baseURL}}"
+													],
+													"path": [
+														"carrinhos"
+													]
+												},
+												"description": "Realizando um teste na requisição a partir de um uma quantidade de carrinhos além do limite.\n\nResultado (não consta no swagger):\n\n<img src=\"https://content.pstmn.io/134329a3-6ccd-4c29-9955-b57dfe87e5c0/aW1hZ2UucG5n\" alt=\"\" height=\"123\" width=\"267\">"
+											},
+											"response": []
+										}
+									],
+									"description": "Pasta abrigando as requisições negativas do verbo POST na rota /carrinhos."
+								}
+							],
+							"description": "Verbo responsável por cadastrar o carrinho do usuário na rota de /carrinhos"
+						},
+						{
+							"name": "DELETE",
+							"item": [
+								{
+									"name": "Excluir Compra (carrinho)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"//Variáveis\r",
+													"const responseJson = pm.response.json()\r",
+													"\r",
+													"\r",
+													"//Validar o Status Code\r",
+													"pm.test(\"Validando Status Code: 200\", function () {\r",
+													"    pm.response.to.have.status(200);});\r",
+													"\r",
+													"//Validar se o Status Code retorna uma string (OK)\r",
+													"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+													"    pm.response.to.have.status(\"OK\");});\r",
+													"\r",
+													"//Validar o valor da variável (ao caso, uma string)\r",
+													"pm.test(\"Validação que há um campo: String\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"Registro excluído com sucesso\");});\r",
+													"\r",
+													"// Validar se os atributos existem (message)\r",
+													"const atributos = ['message']\r",
+													"atributos.forEach((atributo) => {\r",
+													"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+													"        pm.expect(responseJson[atributo]).to.exist})})"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"const url = pm.environment.get('baseURL')\r",
+													"\r",
+													"const postRequest = {\r",
+													"    url: `${url}/login`,\r",
+													"    method: 'POST',\r",
+													"    header: {\r",
+													"        'Content-Type': 'application/json'\r",
+													"    },\r",
+													"    body: {\r",
+													"        mode: 'raw',\r",
+													"        raw: JSON.stringify({\r",
+													"            \"email\": \"beltrano@qa.com.br\",\r",
+													"            \"password\": \"teste\"\r",
+													"        })\r",
+													"    }\r",
+													"}\r",
+													"\r",
+													"pm.sendRequest(postRequest, (err, response) => {\r",
+													"    const res = response.json()\r",
+													"    try {\r",
+													"        pm.environment.set('token', res.authorization.slice(7))\r",
+													"    } catch {\r",
+													"        console.warn('FAIL')\r",
+													"    }\r",
+													"})"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/carrinhos/cancelar-compra",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"carrinhos",
+												"cancelar-compra"
+											]
+										},
+										"description": "Requisição responsável por excluir carrinho do usuário logado (pre-request).\n\nResultado:\n\n<img src=\"https://content.pstmn.io/43337e1a-364f-4e8b-b97a-053029444d90/aW1hZ2UucG5n\" alt=\"\" height=\"164\" width=\"260\">"
+									},
+									"response": []
+								},
+								{
+									"name": "Concluir Compra (carrinho)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"//Variáveis\r",
+													"const responseJson = pm.response.json()\r",
+													"\r",
+													"\r",
+													"//Validar o Status Code\r",
+													"pm.test(\"Validando Status Code: 200\", function () {\r",
+													"    pm.response.to.have.status(200);});\r",
+													"\r",
+													"//Validar se o Status Code retorna uma string (OK)\r",
+													"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+													"    pm.response.to.have.status(\"OK\");});\r",
+													"\r",
+													"//Validar o valor da variável (ao caso, uma string)\r",
+													"pm.test(\"Validação que há um campo: String\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"Não foi encontrado carrinho para esse usuário\");});\r",
+													"\r",
+													"// Validar se os atributos existem (message)\r",
+													"const atributos = ['message']\r",
+													"atributos.forEach((atributo) => {\r",
+													"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+													"        pm.expect(responseJson[atributo]).to.exist})})"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/carrinhos/concluir-compra",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"carrinhos",
+												"concluir-compra"
+											]
+										},
+										"description": "Requisição responsável por excluir o carrinho (concluir a compra) do usuário logado (pre-request).\n\nResultado:\n\n<img src=\"https://content.pstmn.io/c2ce9f8d-41c5-4089-b0bc-12a657afd775/aW1hZ2UucG5n\" alt=\"\" height=\"138\" width=\"230\">"
+									},
+									"response": []
+								}
+							]
+						}
+					],
+					"description": "Descrição ServeRest: Consulte os carrinhos cadastrados, faça um para o seu usuário e, no final, desista da compra pois estava só dando uma olhadinha.\n\nEndFragment<img src=\"https://content.pstmn.io/0a7a2b13-7e37-4391-ad05-2fa2bac9fdc4/aW1hZ2UucG5n\" alt=\"Rota%20responsável%20por%20listar,%20cadastrar,%20concluir%20e%20excluir%20carrinho%20(compras).\" height=\"492\" width=\"455\">"
+				}
+			],
+			"description": "Pasta principal que abriga todas as requisições principais do projeto, organizadas dentro de rostas e verbos (além de positivos e negativos)."
+		},
+		{
+			"name": "Cenário de Testes",
+			"item": [
+				{
+					"name": "Positivos",
+					"item": [
+						{
+							"name": "Fluxo de Compras (Básico)",
+							"item": [
+								{
+									"name": "Realizar o Login",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"//Variáveis\r",
+													"const responseJson = pm.response.json()\r",
+													"\r",
+													"\r",
+													"//Validar o Status Code\r",
+													"pm.test(\"Validando Status Code: 200\", function () {\r",
+													"    pm.response.to.have.status(200);});\r",
+													"\r",
+													"//Validar se o Status Code retorna uma string (OK)\r",
+													"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+													"    pm.response.to.have.status(\"OK\");});\r",
+													"\r",
+													"// Validação Tempo de Resposta\r",
+													"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+													"\r",
+													"//Validar o valor da variável (ao caso, uma string)\r",
+													"pm.test(\"Validação que há um campo: String\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"Login realizado com sucesso\");});\r",
+													"\r",
+													"// Validar se os atributos existem (message, authorization)\r",
+													"const atributos = ['message', 'authorization']\r",
+													"atributos.forEach((atributo) => {\r",
+													"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+													"        pm.expect(responseJson[atributo]).to.exist})})"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"email\": \"{{emailValido}}\",\r\n  \"password\": \"{{senhaValida}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURL}}/login",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"login"
+											]
+										},
+										"description": "Realizando o login para efetuar um fluxo de compras.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/1753a2b9-c9ba-4e57-bce8-a35358f04028/aW1hZ2UucG5n\" alt=\"\" height=\"247\" width=\"337\">"
+									},
+									"response": []
+								},
+								{
+									"name": "Cadastrar Carrinho",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"//Variáveis\r",
+													"const responseJson = pm.response.json()\r",
+													"\r",
+													"\r",
+													"//Validar o Status Code\r",
+													"pm.test(\"Validando Status Code: 201\", function () {\r",
+													"    pm.response.to.have.status(201);});\r",
+													"\r",
+													"//Validar se o Status Code retorna uma string (criado)\r",
+													"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+													"    pm.response.to.have.status(\"Created\");});\r",
+													"\r",
+													"//Validar o valor da variável (ao caso, uma string)\r",
+													"pm.test(\"Validação que há um campo: String\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"Cadastro realizado com sucesso\");});\r",
+													"\r",
+													"// Validar se os atributos existem (message, _id)\r",
+													"const atributos = ['message', '_id']\r",
+													"atributos.forEach((atributo) => {\r",
+													"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+													"        pm.expect(responseJson[atributo]).to.exist})})"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"const url = pm.environment.get('baseURL')\r",
+													"\r",
+													"const postRequest = {\r",
+													"    url: `${url}/login`,\r",
+													"    method: 'POST',\r",
+													"    header: {\r",
+													"        'Content-Type': 'application/json'\r",
+													"    },\r",
+													"    body: {\r",
+													"        mode: 'raw',\r",
+													"        raw: JSON.stringify({\r",
+													"            \"email\": \"beltrano@qa.com.br\",\r",
+													"            \"password\": \"teste\"\r",
+													"        })\r",
+													"    }\r",
+													"}\r",
+													"\r",
+													"pm.sendRequest(postRequest, (err, response) => {\r",
+													"    const res = response.json()\r",
+													"    try {\r",
+													"        pm.environment.set('token', res.authorization.slice(7))\r",
+													"    } catch {\r",
+													"        console.warn('FAIL')\r",
+													"    }\r",
+													"})"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"produtos\": [\r\n    {\r\n      \"idProduto\": \"56E0qwNvr9jRMSjX\",\r\n      \"quantidade\": 1\r\n    }\r\n  ]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURL}}/carrinhos",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"carrinhos"
+											]
+										},
+										"description": "Cadastrando um carrinho no fluxo de compras para o usuário logado.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/e6b4a802-a8dd-4deb-88e8-95fca73f91a6/aW1hZ2UucG5n\" alt=\"\" height=\"142\" width=\"322\">"
+									},
+									"response": []
+								},
+								{
+									"name": "Concluir Compra",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"//Variáveis\r",
+													"const responseJson = pm.response.json()\r",
+													"\r",
+													"\r",
+													"//Validar o Status Code\r",
+													"pm.test(\"Validando Status Code: 200\", function () {\r",
+													"    pm.response.to.have.status(200);});\r",
+													"\r",
+													"//Validar se o Status Code retorna uma string (OK)\r",
+													"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+													"    pm.response.to.have.status(\"OK\");});\r",
+													"\r",
+													"//Validar o valor da variável (ao caso, uma string)\r",
+													"pm.test(\"Validação que há um campo: String\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"Registro excluído com sucesso\");});\r",
+													"\r",
+													"// Validar se os atributos existem (message)\r",
+													"const atributos = ['message']\r",
+													"atributos.forEach((atributo) => {\r",
+													"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+													"        pm.expect(responseJson[atributo]).to.exist})})"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURL}}/carrinhos/concluir-compra",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"carrinhos",
+												"concluir-compra"
+											]
+										},
+										"description": "Concluindo a compra realizada a partir do usuário logado.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/574dd984-801a-4ab6-af95-2287a627cf12/aW1hZ2UucG5n\" alt=\"\" height=\"125\" width=\"307\">"
+									},
+									"response": []
+								}
+							]
+						}
+					],
+					"description": "Pasta abrigando as requisições positivas do cenário de testes."
+				},
+				{
+					"name": "Negativos",
+					"item": [
+						{
+							"name": "Erro em Carrinho",
+							"item": [
+								{
+									"name": "Realizar o Login (usuário s/ admin)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"//Variáveis\r",
+													"const responseJson = pm.response.json()\r",
+													"\r",
+													"\r",
+													"//Validar o Status Code\r",
+													"pm.test(\"Validando Status Code: 200\", function () {\r",
+													"    pm.response.to.have.status(200);});\r",
+													"\r",
+													"//Validar se o Status Code retorna uma string (OK)\r",
+													"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+													"    pm.response.to.have.status(\"OK\");});\r",
+													"\r",
+													"// Validação Tempo de Resposta\r",
+													"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+													"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+													"    \r",
+													"//Validar o valor da variável (ao caso, uma string)\r",
+													"pm.test(\"Validação que há um campo: String\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"Login realizado com sucesso\");});\r",
+													"\r",
+													"// Validar se os atributos existem (message, authorization)\r",
+													"const atributos = ['message', 'authorization']\r",
+													"atributos.forEach((atributo) => {\r",
+													"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+													"        pm.expect(responseJson[atributo]).to.exist})})"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"email\": \"{{email2(segundoEmail)}}\",\r\n  \"password\": \"{{senha2(segundaSenha)}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURL}}/login",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"login"
+											]
+										},
+										"description": "Teste a partir da realização de um login sem usuário com admin (carrinhos).\n\nResultado:\n\n<img src=\"https://content.pstmn.io/db480bc3-e5eb-422b-a510-5b524b523ae1/aW1hZ2UucG5n\" alt=\"\" height=\"125\" width=\"307\">"
+									},
+									"response": []
+								},
+								{
+									"name": "Cadastrar Carrinho (quantidade fora de estoque)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"//Variáveis\r",
+													"const responseJson = pm.response.json()\r",
+													"\r",
+													"\r",
+													"//Validar o Status Code\r",
+													"pm.test(\"Validando Status Code: 400\", function () {\r",
+													"    pm.response.to.have.status(400);});\r",
+													"\r",
+													"//Validar se o Status Code retorna uma string (Bad Request)\r",
+													"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+													"    pm.response.to.have.status(\"Bad Request\");});\r",
+													"\r",
+													"//Validar o valor da variável (ao caso, uma string)\r",
+													"pm.test(\"Validação que há um campo: String\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"Produto não possui quantidade suficiente\");});\r",
+													"\r",
+													"// Validar se os atributos existem (message, item)\r",
+													"const atributos = ['message', 'item']\r",
+													"atributos.forEach((atributo) => {\r",
+													"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+													"        pm.expect(responseJson[atributo]).to.exist})})"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"const url = pm.environment.get('baseURL')\r",
+													"\r",
+													"const postRequest = {\r",
+													"    url: `${url}/login`,\r",
+													"    method: 'POST',\r",
+													"    header: {\r",
+													"        'Content-Type': 'application/json'\r",
+													"    },\r",
+													"    body: {\r",
+													"        mode: 'raw',\r",
+													"        raw: JSON.stringify({\r",
+													"            \"email\": \"beltrano@qa.com.br\",\r",
+													"            \"password\": \"teste\"\r",
+													"        })\r",
+													"    }\r",
+													"}\r",
+													"\r",
+													"pm.sendRequest(postRequest, (err, response) => {\r",
+													"    const res = response.json()\r",
+													"    try {\r",
+													"        pm.environment.set('token', res.authorization.slice(7))\r",
+													"    } catch {\r",
+													"        console.warn('FAIL')\r",
+													"    }\r",
+													"})"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"produtos\": [\r\n    {\r\n      \"idProduto\": \"56E0qwNvr9jRMSjX\",\r\n      \"quantidade\": 500\r\n    }\r\n  ]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURL}}/carrinhos",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"carrinhos"
+											]
+										},
+										"description": "Teste realizado a partir de um carrinho com um produto fora de estoque.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/7e38af0f-c31e-4dab-9a0b-4b284db5434d/aW1hZ2UucG5n\" alt=\"\" height=\"224\" width=\"419\">"
+									},
+									"response": []
+								},
+								{
+									"name": "Excluir Compra (usuário inválido)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"//Variáveis\r",
+													"const responseJson = pm.response.json()\r",
+													"\r",
+													"\r",
+													"//Validar o Status Code\r",
+													"pm.test(\"Validando Status Code: 200\", function () {\r",
+													"    pm.response.to.have.status(200);});\r",
+													"\r",
+													"//Validar se o Status Code retorna uma string (OK)\r",
+													"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+													"    pm.response.to.have.status(\"OK\");});\r",
+													"\r",
+													"//Validar o valor da variável (ao caso, uma string)\r",
+													"pm.test(\"Validação que há um campo: String\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"Não foi encontrado carrinho para esse usuário\");});\r",
+													"\r",
+													"// Validar se os atributos existem (message)\r",
+													"const atributos = ['message']\r",
+													"atributos.forEach((atributo) => {\r",
+													"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+													"        pm.expect(responseJson[atributo]).to.exist})})"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/carrinhos/cancelar-compra",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"carrinhos",
+												"cancelar-compra"
+											]
+										},
+										"description": "Teste realizado a partir da tentativa de um login de um usuário inválido.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/7508c4b2-4309-471b-9242-1b1b08dfdaa8/aW1hZ2UucG5n\" alt=\"\" height=\"146\" width=\"235\">"
+									},
+									"response": []
+								},
+								{
+									"name": "Concluir Compra (usuário inválido)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"//Variáveis\r",
+													"const responseJson = pm.response.json()\r",
+													"\r",
+													"\r",
+													"//Validar o Status Code\r",
+													"pm.test(\"Validando Status Code: 200\", function () {\r",
+													"    pm.response.to.have.status(200);});\r",
+													"\r",
+													"//Validar se o Status Code retorna uma string (OK)\r",
+													"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+													"    pm.response.to.have.status(\"OK\");});\r",
+													"\r",
+													"//Validar o valor da variável (ao caso, uma string)\r",
+													"pm.test(\"Validação que há um campo: String\", function () {\r",
+													"    pm.expect(pm.response.text()).to.include(\"Não foi encontrado carrinho para esse usuário\");});\r",
+													"\r",
+													"// Validar se os atributos existem (message)\r",
+													"const atributos = ['message']\r",
+													"atributos.forEach((atributo) => {\r",
+													"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+													"        pm.expect(responseJson[atributo]).to.exist})})"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/carrinhos/concluir-compra",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"carrinhos",
+												"concluir-compra"
+											]
+										},
+										"description": "Teste realizado a partir da tentativa de concluir uma compra (excluir carrinho) de um usuário inválido.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/b8298216-f934-4f6f-856d-8da2797a23b5/aW1hZ2UucG5n\" alt=\"\" height=\"145\" width=\"250\">"
+									},
+									"response": []
+								}
+							],
+							"description": "Pasta abrigando as requisições negativas do cenário de testes."
+						}
+					],
+					"description": "Pasta abrigando as requisições positivas do cenário de testes."
+				}
+			],
+			"description": "Pasta responsável por abrigar os cenários de teste do projeto.\n\n<img src=\"https://content.pstmn.io/af8c6375-b480-449f-80a3-03387febf30f/aW1hZ2UucG5n\" alt=\"\" height=\"333\" width=\"368\">"
+		},
+		{
+			"name": "Issues",
+			"item": [
+				{
+					"name": "/usuarios",
+					"item": [
+						{
+							"name": "Editar Usuário por ID (tentar editar ID)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"//Variáveis\r",
+											"const responseJson = pm.response.json()\r",
+											"\r",
+											"\r",
+											"//Validar o Status Code\r",
+											"pm.test(\"Validando Status Code: 400\", function () {\r",
+											"    pm.response.to.have.status(400);});\r",
+											"\r",
+											"//Validar se o Status Code retorna uma string (OK)\r",
+											"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+											"    pm.response.to.have.status(\"Bad Request\");});\r",
+											"\r",
+											"// Validação Tempo de Resposta\r",
+											"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+											"\r",
+											"//Validar o valor da variável (ao caso, uma string)\r",
+											"pm.test(\"Validação que há um campo: String\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"_id não é permitido\");});\r",
+											"\r",
+											"// Validar se os atributos existem (message)\r",
+											"const atributos = ['_id']\r",
+											"atributos.forEach((atributo) => {\r",
+											"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+											"        pm.expect(responseJson[atributo]).to.exist})})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\": \"Fulano da Silva\",\r\n    \"email\": \"fulano@qa.com\",\r\n    \"password\": \"teste\",\r\n    \"administrador\": \"true\",\r\n    \"_id\": \"0uxuPY0cbmQhpEz1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/usuarios/0uxuPY0cbmQhpEz1",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"usuarios",
+										"0uxuPY0cbmQhpEz1"
+									]
+								},
+								"description": "Ao tentar editar um usuário por ID, é retornado uma mensagem que não consta no swagger da API.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/40261eb9-8a87-48e5-bd73-47be3e831e3f/aW1hZ2UucG5n\" width=\"220\" height=\"127\">"
+							},
+							"response": []
+						},
+						{
+							"name": "Editar Usuário por ID (vírgula/aspas)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"//Variáveis\r",
+											"const responseJson = pm.response.json()\r",
+											"\r",
+											"\r",
+											"//Validar o Status Code\r",
+											"pm.test(\"Validando Status Code: 500\", function () {\r",
+											"    pm.response.to.have.status(500);});\r",
+											"\r",
+											"//Validar se o Status Code retorna uma string (Internal Server Error)\r",
+											"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+											"    pm.response.to.have.status(\"Internal Server Error\");});\r",
+											"\r",
+											"// Validação Tempo de Resposta\r",
+											"pm.test(\"Validação que o Tempo de Resposta foi menor que: 200ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);});\r",
+											"\r",
+											"//Validar o valor da variável (ao caso, uma string)\r",
+											"pm.test(\"Validação que há um campo: String\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"Adicione aspas em todos os valores. Para mais informações acesse a issue https://github.com/ServeRest/ServeRest/issues/225\");});\r",
+											"\r",
+											"// Validar se os atributos existem (message)\r",
+											"const atributos = ['message']\r",
+											"atributos.forEach((atributo) => {\r",
+											"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+											"        pm.expect(responseJson[atributo]).to.exist})})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nome\": \"Fulano\",\r\n    \"email\": \"fulano@qa.com\",\r\n    \"password\": \"teste\",\r\n    \"administrador\": \"true\",\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/usuarios/0uxuPY0cbmQhpEz1",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"usuarios",
+										"0uxuPY0cbmQhpEz1"
+									]
+								},
+								"description": "Ao tentar deixar uma aspa a mais no body da requisição, é retornado uma mensagem que não consta no swagger da API.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/8a9a40a5-5294-41de-b188-b31a766212a9/aW1hZ2UucG5n\" alt=\"\" height=\"154\" width=\"387\">"
+							},
+							"response": []
+						}
+					],
+					"description": "Issues da rota /usuarios."
+				},
+				{
+					"name": "/produtos",
+					"item": [
+						{
+							"name": "Cadastrar Produto (reconhecer decimal)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"//Variáveis\r",
+											"const responseJson = pm.response.json()\r",
+											"\r",
+											"\r",
+											"//Validar o Status Code\r",
+											"pm.test(\"Validando Status Code: 400\", function () {\r",
+											"    pm.response.to.have.status(400);});\r",
+											"\r",
+											"//Validar se o Status Code retorna uma string (Bad Request)\r",
+											"pm.test(\"Validação que o Status Code tem uma: String\", function () {\r",
+											"    pm.response.to.have.status(\"Bad Request\");});\r",
+											"\r",
+											"//Validar o valor da variável (ao caso, uma string)\r",
+											"pm.test(\"Validação que há um campo: String\", function () {\r",
+											"    pm.expect(pm.response.text()).to.include(\"preco deve ser um inteiro\");});\r",
+											"\r",
+											"// Validar se os atributos existem (preco)\r",
+											"const atributos = ['preco']\r",
+											"atributos.forEach((atributo) => {\r",
+											"    pm.test(`A Resposta contém o Atributo: \"${atributo}\" em JSON`, () => {\r",
+											"        pm.expect(responseJson[atributo]).to.exist})})"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const url = pm.environment.get('baseURL')\r",
+											"\r",
+											"const postRequest = {\r",
+											"    url: `${url}/login`,\r",
+											"    method: 'POST',\r",
+											"    header: {\r",
+											"        'Content-Type': 'application/json'\r",
+											"    },\r",
+											"    body: {\r",
+											"        mode: 'raw',\r",
+											"        raw: JSON.stringify({\r",
+											"            \"email\": \"beltrano@qa.com.br\",\r",
+											"            \"password\": \"teste\"\r",
+											"        })\r",
+											"    }\r",
+											"}\r",
+											"\r",
+											"pm.sendRequest(postRequest, (err, response) => {\r",
+											"    const res = response.json()\r",
+											"    try {\r",
+											"        pm.environment.set('token', res.authorization.slice(7))\r",
+											"    } catch {\r",
+											"        console.warn('FAIL')\r",
+											"    }\r",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"{{$randomProductName}}\",\r\n  \"preco\": 50.6,\r\n  \"descricao\": \"{{$randomProductMaterial}}\",\r\n  \"quantidade\": 20\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/produtos",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produtos"
+									]
+								},
+								"description": "Ao tentar adicionar um número juntamente de um ponto (50.6) no body da requisição, é retornado uma mensagem que não consta no swagger da API.\n\nResultado:\n\n<img src=\"https://content.pstmn.io/ea387240-3d74-4ff5-87d3-30f9268ef1cd/aW1hZ2UucG5n\" alt=\"\" height=\"122\" width=\"265\">"
+							},
+							"response": []
+						}
+					],
+					"description": "Issues da rota /produtos."
+				}
+			],
+			"description": "Pasta responsável por abrigar as issues do projeto.\n\n<img src=\"https://content.pstmn.io/89b2e6cf-22fe-420a-9499-82d766779c45/aW1hZ2UucG5n\" alt=\"\" height=\"169\" width=\"310\">"
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
